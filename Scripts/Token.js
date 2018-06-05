@@ -185,8 +185,6 @@
 
 
 function CreateToken(){
-
-
 	
 	console.log(web3.eth.accounts[0]);
 
@@ -196,7 +194,8 @@ function CreateToken(){
 	var _tokenSymbol = document.getElementById('Token-Symbol').value/* var of type string here */ ;
 	var standarContract = web3.eth.contract([{"constant":false,"inputs":[{"name":"_spender","type":"address"},{"name":"_value","type":"uint256"}],"name":"approve","outputs":[{"name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_from","type":"address"},{"name":"_to","type":"address"},{"name":"_value","type":"uint256"}],"name":"transferFrom","outputs":[{"name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"_owner","type":"address"}],"name":"balanceOf","outputs":[{"name":"balance","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_to","type":"address"},{"name":"_value","type":"uint256"}],"name":"transfer","outputs":[{"name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"_owner","type":"address"},{"name":"_spender","type":"address"}],"name":"allowance","outputs":[{"name":"remaining","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"inputs":[{"name":"_initialAmount","type":"uint256"},{"name":"_tokenName","type":"string"},{"name":"_decimalUnits","type":"uint8"},{"name":"_tokenSymbol","type":"string"}],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":true,"name":"_from","type":"address"},{"indexed":true,"name":"_to","type":"address"},{"indexed":false,"name":"_value","type":"uint256"}],"name":"Transfer","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"_owner","type":"address"},{"indexed":true,"name":"_spender","type":"address"},{"indexed":false,"name":"_value","type":"uint256"}],"name":"Approval","type":"event"}]);
 
-	
+	clean();
+
 	standarContract.new(
 	_initialAmount,
 	_tokenName,
@@ -208,9 +207,10 @@ function CreateToken(){
 		gas: '4700000'
 	}, function (e, contract){
 		console.log(e, contract);
+		
 		if (typeof contract.address !== 'undefined') {
 			console.log('Contract mined! address: ' + contract.address + ' transactionHash: ' + contract.transactionHash);
-			clean();
+			alert('Contract mined address: ' + contract.address);
 		}
 	})
 
@@ -223,7 +223,13 @@ function clean(){
 	document.getElementById('Token-Symbol').value="";
 }
 
-$(document).ready(function(){
+window.addEventListener('submit',(event)=>{
+	event.preventDefault();
+	CreateToken();
+})
+
+
+/*$(document).ready(function(){
 
 	$("#Token-Form").bind('submit',function(e){
 
@@ -231,4 +237,4 @@ $(document).ready(function(){
 		CreateToken();
 	})
 
-})
+})*/
