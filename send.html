@@ -1,0 +1,56 @@
+<DOCTYPE html5>
+
+        <html>
+        
+        <head>
+            <title>Token Factory</title>
+            <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+            <script src="web3.js/dist/web3.min.js"></script>
+            <script src="Scripts/connection.js"></script>
+            <script src="Scripts/send.js"></script>
+            <link rel="stylesheet" href="Styles/main.css">
+            
+        </head>
+        
+        <body>
+            <header class="header ">
+                <nav class="menu container">
+                        <div id="logo-container">
+                            <img src="Icons/ethereum.png" width="50px" height="50px" alt="ethereum-logo">
+                        </div>
+                    <ul>
+                        <li>
+                            <a href="home.html">Home</a>
+                        </li>
+                        <li>
+                            <a href="token.html">Token</a>
+                        </li>
+                        <li>
+                            <a href="send.html">Send</a>
+                        </li>
+                    </ul>
+                </nav>
+            </header>
+        
+            <section class="Token">
+        
+                <div class="container">
+
+                    <div id="Add-Form">
+                        <h3><strong>Add token</strong></h3>
+                        <p>Put the direction of token here</p>
+                        <input id="Token-Direction" required placeholder="0X00" type="text">
+                        <button id="Add-Button" onclick="getToken()">Add Token</button>
+                    </div>   
+
+                    <form id="Token-Form">
+                       
+                    </form>
+        
+                </div>
+        
+        
+            </section>
+        </body>
+        
+        </html>
