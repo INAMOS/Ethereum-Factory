@@ -228,13 +228,3 @@ window.addEventListener('submit',(event)=>{
 	CreateToken();
 })
 
-
-/*$(document).ready(function(){
-
-	$("#Token-Form").bind('submit',function(e){
-
-		e.preventDefault();
-		CreateToken();
-	})
-
-})*/

@@ -20,6 +20,7 @@ function connectWeb3(){
             console.log('Metamask')
         } else {
             console.log('No web3? You should consider trying MetaMask!')
+            console.log('https://metamask.io/')
             // fallback - use your fallback strategy (local node / hosted node + in-dapp id mgmt / fail)
             web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
         }

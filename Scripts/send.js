@@ -1,19 +1,43 @@
 function sendToken(){
+
+    const token=web3.eth.contract([{"constant":false,"inputs":[{"name":"_spender","type":"address"},{"name":"_value","type":"uint256"}],"name":"approve","outputs":[{"name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_from","type":"address"},{"name":"_to","type":"address"},{"name":"_value","type":"uint256"}],"name":"transferFrom","outputs":[{"name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"_owner","type":"address"}],"name":"balanceOf","outputs":[{"name":"balance","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_to","type":"address"},{"name":"_value","type":"uint256"}],"name":"transfer","outputs":[{"name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"_owner","type":"address"},{"name":"_spender","type":"address"}],"name":"allowance","outputs":[{"name":"remaining","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"inputs":[{"name":"_initialAmount","type":"uint256"},{"name":"_tokenName","type":"string"},{"name":"_decimalUnits","type":"uint8"},{"name":"_tokenSymbol","type":"string"}],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":true,"name":"_from","type":"address"},{"indexed":true,"name":"_to","type":"address"},{"indexed":false,"name":"_value","type":"uint256"}],"name":"Transfer","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"_owner","type":"address"},{"indexed":true,"name":"_spender","type":"address"},{"indexed":false,"name":"_value","type":"uint256"}],"name":"Approval","type":"event"}]);
+    const tokenInstance=token.at(document.getElementById('Token-Direction').value);
     
+    let to=document.getElementById('direction-to').value;
+    let value=parseInt(document.getElementById('value-to').value);
+
+    tokenInstance.transfer(to,value,(err,txthash)=>{
+        if(!err){
+            console.log(txthash);
+        }
+    })
 }
 
 function addTokenForm(){
 
-    document.getElementById('Add-Form').style="display:none";
-   
-    document.getElementById('Token-Form').innerHTML="Token name: "+
+    let contractAddr=document.getElementById('Token-Direction').value;
+
+    if(web3.isAddress(contractAddr)){
+        document.getElementById('Add-Form').style="display:none";
+        document.getElementById('Token-Form').innerHTML=//"Token name: "+
+                                                    
+                                                    "<h4>Interacting with Contract address: "+contractAddr+"</h4>"+
                                                     "<h3>To</h3>"+
-                                                    "<input id='Token-Code' type='text'>"+    
+                                                    "<input id='direction-to' type='text'>"+    
                                                     "<h3><strong>Amount</strong></h3>"+
-                                                    "<input id='Token-Decimals' type='text'>"+
+                                                    "<input id='value-to' type='text'>"+
                                                     "<button>Send Token</button>";
     
+    }else{
+        document.getElementById('Warning').innerHTML="Not valid direction"
+    }
 }
+
+
+window.addEventListener('submit',(event)=>{
+    event.preventDefault();
+    sendToken();
+})
 
 function getToken(){
 
@@ -23,5 +47,10 @@ function getToken(){
     console.log(document.getElementById('Token-Direction').value);
     
     
-    tokenInstance.balanceOf(web3.eth.accounts[0]);
+    tokenInstance.balanceOf(web3.eth.accounts[0],(err,res)=>{
+
+        if(!err){
+            console.log(resu.toString())
+        }
+    });
 }
